@@ -64,6 +64,12 @@ const createWindow = async () => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
+  const prodPreloadPath = path.join(__dirname, 'preload.js');
+  const devPreloadPath = path.join(__dirname, '../../.erb/dll/preload.js');
+  const preloadPath = fs.existsSync(prodPreloadPath)
+    ? prodPreloadPath
+    : devPreloadPath;
+
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
